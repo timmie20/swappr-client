@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Swappr - Phone Worth Calculator & Exchange Platform
+
+Swappr is a secure and transparent platform for buying and swapping phones in Nigeria. The platform implements a phone rating calculator to accurately represent device conditions, addressing prevalent fraud in the Nigerian market.
+
+## Features
+
+- **Phone Rating Calculator**: System to accurately assess phone conditions calculations mainly done on backend
+- **Secure Transactions**: Built-in fraud prevention and user verification
+- **Device History**: Track and verify device conditions
+- **User Verification**: Secure authentication system
+- **Marketplace**: Buy and swap phones with confidence
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19
+- **Styling**: Tailwind CSS v4, Ant Design
+- **Font**: Switzer Variable Font
+- **State Management**: (To be implemented)
+- **Backend**: (To be implemented)
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── layout.tsx         # Root layout with font configuration
+│   └── page.tsx           # Home page
+├── features/              # Feature-based architecture
+│   └── home/             # Home page feature
+│       ├── Client.tsx    # Client-side components
+│       └── index.ts      # Feature exports
+├── components/           # Reusable components
+│   └── others/          # Additional components
+│       └── PhoneDealCard.tsx # Card component for phone deals
+└── public/              # Static assets
+    └── fonts/           # Font files
+        ├── Switzer-Variable.ttf
+        └── Switzer-VariableItalic.ttf
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone [repository-url]
+   cd swappr-client
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   pnpm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Run the development server**
 
-## Learn More
+   ```bash
+   pnpm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Component Documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Home Page (`src/features/home/Client.tsx`)
 
-## Deploy on Vercel
+The home page consists of:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Hero section with search input
+- Phone brand selection buttons
+- Deals section with phone deal cards
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Search Input
+
+- Uses Ant Design's Input component
+- Custom styled with Tailwind CSS
+- Placeholder text with 58% opacity
+- Search icon prefix
+
+#### Brand Selection
+
+- Horizontal scrollable list of phone brands
+- Uses Ant Design's Button component
+- Custom styling for selected/unselected states
+- Snap scrolling for better mobile experience
+
+#### Phone Deal Cards
+
+- Grid layout for deals
+- Reusable PhoneDealCard component
+- Responsive design
+
+## Styling Guidelines
+
+### Colors
+
+- Primary: #08161f
+- Text: Various opacities of primary color
+- Background: Light gray (#f9fafb)
+
+### Typography
+
+- Font Family: Switzer Variable
+- Font Sizes:
+  - xsmall: 12px
+  - small: 15px
+  - medium: 18px;
+  - large: 28px;
+  - xlarge: 36px;
+  - xxlarge: 48px;
+
+### Spacing
+
+- Consistent gap usage (gap-4, gap-8)
+- Responsive padding and margins
+- Max-width constraints for content
+
+## Contributing
+
+(To be added)
+
+## License
+
+(To be added)
