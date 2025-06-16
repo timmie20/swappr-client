@@ -139,3 +139,30 @@ export const questions: Question[] = [
     note: "Select all the Faulty parts of your device",
   },
 ];
+
+export const devices = [
+  {
+    id: 1,
+    name: "iPhone 16",
+    url: "/assets/images/iphone16.png",
+    price: "N 1,300,000",
+  },
+  {
+    id: 2,
+    name: "Iphone 15proMax",
+    url: "/assets/images/iphone-2.png",
+    price: "N 1,300,000",
+  },
+  {
+    id: 3,
+    name: "Iphone 14 pro",
+    url: "/assets/images/iphone16.png",
+    price: "N 1,300,000",
+  },
+  {
+    id: 4,
+    name: "Iphone 12",
+    url: "/assets/images/iphone-2.png",
+    price: "N 1,300,000",
+  },
+];

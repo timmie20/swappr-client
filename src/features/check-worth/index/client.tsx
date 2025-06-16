@@ -1,119 +1,64 @@
 "use client";
 import "@ant-design/v5-patch-for-react-19";
-import { Input } from "antd";
-import { Search } from "lucide-react";
+
 import DeviceCard from "@/components/others/DeviceCard";
 import Link from "next/link";
-import PrimaryButton from "@/components/others/PrimaryButton";
+import { Button } from "@/components/ui/button";
+import AppleIcon from "@/components/icon/apple-icon";
+import Heading from "@/components/shared/Heading";
+import { devices } from "@/data/data";
 
-const models = [
-  {
-    id: 1,
-    label: "iPhone",
-    isSelected: true,
-  },
-  {
-    id: 2,
-    label: "Samsung Galaxy",
-    isSelected: false,
-  },
-  {
-    id: 3,
-    label: "Google Pixel",
-    isSelected: false,
-  },
-  {
-    id: 4,
-    label: "OnePlus",
-    isSelected: false,
-  },
-  {
-    id: 5,
-    label: "Xiaomi",
-    isSelected: false,
-  },
-  {
-    id: 6,
-    label: "Huawei",
-    isSelected: false,
-  },
-  {
-    id: 7,
-    label: "Vivo",
-    isSelected: false,
-  },
-  {
-    id: 8,
-    label: "Tecno",
-    isSelected: false,
-  },
-];
-
-const devices = [
-  {
-    id: 1,
-    name: "iPhone 16",
-    url: "/assets/images/iphone16.png",
-    price: "N 1,300,000",
-  },
-  {
-    id: 2,
-    name: "Iphone 15proMax",
-    url: "/assets/images/iphone-2.png",
-    price: "N 1,300,000",
-  },
-  {
-    id: 3,
-    name: "Iphone 14 pro",
-    url: "/assets/images/iphone16.png",
-    price: "N 1,300,000",
-  },
-  {
-    id: 4,
-    name: "Iphone 12",
-    url: "/assets/images/iphone-2.png",
-    price: "N 1,300,000",
-  },
+const iphoneModels = [
+  "7",
+  "7 Plus",
+  "8",
+  "8 Plus",
+  "X",
+  "XR",
+  "XS",
+  "XS Max",
+  "11",
+  "11 Pro",
+  "11 Pro Max",
+  "SE (2nd gen)",
+  "12 mini",
+  "12",
+  "12 Pro",
+  "12 Pro Max",
+  "13 mini",
+  "13",
+  "13 Pro",
+  "13 Pro Max",
+  "SE (3rd gen)",
+  "14",
+  "14 Plus",
+  "14 Pro",
+  "14 Pro Max",
+  "15",
+  "15 Plus",
+  "15 Pro",
+  "15 Pro Max",
+  "16e",
+  "16",
+  "16 Plus",
+  "16 Pro",
+  "16 Pro Max",
 ];
 
 export default function CheckWorth() {
   return (
     <div className="py-12 sm:px-6">
       <div className="text-center">
-        <h1 className="text-tertiary text-xlarge sm:text-xxlarge leading-[105%] font-semibold tracking-tight text-balance">
-          Find out how much your phone is worth{" "}
-        </h1>
-
-        <div className="relative mx-auto my-10 h-18 max-w-md rounded-full px-2 py-2 sm:flex sm:justify-center">
-          <div className="from-secondary to-primary absolute inset-0 top-5 rounded-full bg-gradient-to-r blur-2xl" />
-          <Input
-            size="large"
-            placeholder="What phone are you using?"
-            prefix={<Search size={16} />}
-            className="placeholder:text-tertiary/58 !font-switzer relative z-10"
-            style={{
-              height: "56px",
-              borderRadius: "50px",
-              position: "relative",
-            }}
-          />
-        </div>
+        <Heading>Find out how much your iphone is worth </Heading>
       </div>
 
-      <div className="scrollbar-hide mx-auto max-w-[588px] snap-x snap-mandatory overflow-x-auto py-3">
-        <div className="flex min-w-max items-center gap-4">
-          {models.map((model) => (
-            <div key={model.id} className="shrink-0 snap-start">
-              <PrimaryButton
-                type={model.isSelected ? "primary" : "default"}
-                shape="round"
-                size="large"
-              >
-                {model.label}
-              </PrimaryButton>
-            </div>
-          ))}
-        </div>
+      <div className="scrollbar-hide my-10 flex w-full snap-mandatory items-center gap-2 overflow-x-auto md:flex-wrap md:justify-center">
+        {iphoneModels.map((model) => (
+          <Button variant="outline" size="sm" key={model}>
+            <AppleIcon />
+            {model}
+          </Button>
+        ))}
       </div>
 
       <section id="deals" className="mt-12">

@@ -1,5 +1,6 @@
+"use client";
 import React, { memo } from "react";
-import { Card, Avatar, Badge } from "antd";
+import { Card, Badge } from "antd";
 import Image from "next/image";
 import { ArrowRightLeft, DollarSign, PanelBottomOpen } from "lucide-react";
 
@@ -100,9 +101,9 @@ const PhoneDealCard = memo(({ deal }: DealProps) => {
         </div>
       </Badge.Ribbon>
       <Meta
-        avatar={
-          <Avatar src="https://api.dicebear.com/9.x/adventurer/svg?seed=5" />
-        }
+        // avatar={
+        //   <Avatar src="https://api.dicebear.com/9.x/adventurer/svg?seed=5" />
+        // }
         style={{ margin: "12px 0", fontFamily: "var(--font-switzer)" }}
         title={deal.name}
         description={`from ${deal.price}`}

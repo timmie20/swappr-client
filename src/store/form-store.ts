@@ -79,4 +79,9 @@ export const useFormStore = create<FormState>((set, get) => ({
     const { currentStep } = get();
     return Math.round((currentStep / questions.length) * 100);
   },
+
+  submitForm: () => {
+    const { answers } = get();
+    console.log(answers);
+  },
 }));
