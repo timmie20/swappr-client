@@ -1,5 +1,4 @@
 import React from "react";
-import "@ant-design/v5-patch-for-react-19";
 import ProgressBar from "@/components/shared/progress";
 
 interface FormLayoutProps {
@@ -12,7 +11,7 @@ export default function FormLayout({ children }: FormLayoutProps) {
       <div className="sticky top-0 z-50 bg-white py-4 min-[460px]:mt-16">
         <ProgressBar />
       </div>
-      <main>{children}</main>
+      <main className="min-h-dvh">{children}</main>
     </div>
   );
 }

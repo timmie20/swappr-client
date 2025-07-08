@@ -1,6 +1,6 @@
-import { QuestionPage } from "@/features/form";
+import { Forms } from "@/features/form";
 import React from "react";
 
 export default function page() {
-  return <QuestionPage />;
+  return <Forms />;
 }

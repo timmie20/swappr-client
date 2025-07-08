@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
-import FormRenderer from "./FormRenderer";
 import { useRouter } from "next/navigation";
-import FormLayout from "@/layouts/form";
 import { useFormStore } from "@/store/form-store";
 import BoldLabel from "@/components/form/label";
 import { Button } from "@/components/ui/button";
+import FormRenderer from "@/components/form/FormRenderer";
 
 export default function FormStep() {
   const router = useRouter();
@@ -26,7 +25,7 @@ export default function FormStep() {
   if (!currentQuestion) return null;
 
   return (
-    <FormLayout>
+    <>
       <div className="relative pb-7">
         <div className="h-[60dvh] space-y-5 overflow-auto min-[460px]:h-[45dvh]">
           <BoldLabel>{currentQuestion?.label}</BoldLabel>
@@ -51,6 +50,6 @@ export default function FormStep() {
           OK
         </Button>
       </div>
-    </FormLayout>
+    </>
   );
 }

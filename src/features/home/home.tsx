@@ -1,13 +1,6 @@
 import React from "react";
-import Home from "./Client";
-import MainLayout from "@/layouts/main";
+import Client from "./Client";
 
 export const HomePage = () => {
-  return (
-    <MainLayout>
-      <Home />
-    </MainLayout>
-  );
+  return <Client />;
 };
-
-export default HomePage;

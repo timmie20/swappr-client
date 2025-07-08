@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <ConfigProvider theme={customTheme}>
         <body
           className={`${switzer.variable} ${inter.variable} font-sans antialiased`}

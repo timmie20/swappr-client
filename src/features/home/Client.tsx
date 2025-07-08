@@ -48,7 +48,7 @@ const models = [
     isSelected: false,
   },
 ];
-export default function Home() {
+export default function Client() {
   return (
     <div className="py-12 sm:px-6">
       <div className="text-center">
