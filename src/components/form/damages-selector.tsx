@@ -14,7 +14,7 @@ import Selector from "./selector";
 import { useFormStore } from "@/store/form-store";
 
 export default function DamagesSelector() {
-  const { currentQuestion } = useFormStore();
+  const currentQuestion = useFormStore((s) => s.currentQuestion);
   const filter = false; // Filter functionality is disabled
 
   const options: DamagesType =

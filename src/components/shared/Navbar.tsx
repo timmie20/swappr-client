@@ -3,7 +3,7 @@ import { Button } from "antd";
 export default function Navbar() {
   return (
     <nav className="bg-white">
-      <div className="mx-auto max-w-[794px] px-4 sm:px-4 lg:px-0">
+      <div className="mx-auto max-w-[850px] px-4 sm:px-4 lg:px-0">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <h1 className="text-large font-bold tracking-tight text-gray-900">

@@ -1,1 +1,1 @@
-export { QuestionPage } from "./form";
+export { Forms } from "./form";

@@ -8,6 +8,7 @@ interface FormState {
   answers: Record<string, Answer>;
   currentQuestion: Question | null;
   progress: number;
+  direction: "forward" | "backward";
 
   // Actions
   setAnswer: (questionId: string, value: string | string[]) => void;
@@ -22,6 +23,7 @@ export const useFormStore = create<FormState>((set, get) => ({
   answers: {},
   currentQuestion: questions[0],
   progress: 10,
+  direction: "forward",
 
   setAnswer: (questionId: string, value: string | string[]) => {
     set((state) => ({
@@ -49,6 +51,7 @@ export const useFormStore = create<FormState>((set, get) => ({
       currentStep: state.currentStep + 1,
       currentQuestion: nextQuestion,
       progress: Math.round(((state.currentStep + 1) / questions.length) * 100),
+      direction: "forward",
     }));
   },
 
@@ -63,6 +66,7 @@ export const useFormStore = create<FormState>((set, get) => ({
       currentStep: state.currentStep - 1,
       currentQuestion: prevQuestion,
       progress: Math.round(((state.currentStep - 1) / questions.length) * 100),
+      direction: "backward",
     }));
   },
 

@@ -4,7 +4,6 @@ import PrimaryButton from "@/components/others/PrimaryButton";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { questions } from "@/data/data";
 
 const variants = [
   { id: 1, space: "64gb", isSelected: false },
@@ -68,7 +67,7 @@ export default function Client() {
         </div>
       </div>
 
-      <Link href={`/check-worth/form/${questions[0].slug}`}>
+      <Link href={`/check-worth/form`}>
         <PrimaryButton
           type="primary"
           size="large"

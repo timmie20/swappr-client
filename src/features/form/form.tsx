@@ -1,5 +1,5 @@
 import FormStep from "./Client";
 
-export const QuestionPage = () => {
+export const Forms = () => {
   return <FormStep />;
 };
