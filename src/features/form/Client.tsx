@@ -2,19 +2,19 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormStore } from "@/store/form-store";
-import BoldLabel from "@/components/form/label";
 import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
 import FormRenderer from "@/components/form/FormRenderer";
 
 export default function FormStep() {
   const router = useRouter();
 
-  const { currentQuestion, setAnswer, nextStep } = useFormStore();
+  const currentQuestion = useFormStore((s) => s.currentQuestion);
+  const nextStep = useFormStore((s) => s.nextStep);
 
   useEffect(() => {
-    // Update URL when currentQuestion changes
     if (currentQuestion) {
-      router.push(`/check-worth/form/${currentQuestion.slug}`);
+      router.replace(`/check-worth/form?slug=${currentQuestion.slug}`);
     }
   }, [currentQuestion, router]);
 
@@ -27,28 +27,23 @@ export default function FormStep() {
   return (
     <>
       <div className="relative pb-7">
-        <div className="h-[60dvh] space-y-5 overflow-auto min-[460px]:h-[45dvh]">
-          <BoldLabel>{currentQuestion?.label}</BoldLabel>
-
-          <p className="font-inter text-center text-sm text-slate-400">
-            {currentQuestion?.note}
-          </p>
-
-          <FormRenderer
-            question={currentQuestion}
-            onAnswer={(value) => setAnswer(currentQuestion.id, value)}
-          />
-        </div>
+        <FormRenderer />
         <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-50 block h-20 bg-gradient-to-t from-white to-transparent blur-sm min-[460px]:hidden" />
       </div>
       <div className="mt-6 flex justify-center">
-        <Button
+        <motion.div
           className="h-16 w-[250px] cursor-pointer rounded-full text-white"
-          onClick={handleNext}
-          variant="custom"
+          whileTap={{ scale: 0.8 }}
         >
-          OK
-        </Button>
+          <Button
+            className="h-full w-full"
+            onClick={handleNext}
+            variant="custom"
+            type="button"
+          >
+            OK
+          </Button>
+        </motion.div>
       </div>
     </>
   );

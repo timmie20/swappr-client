@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ConfigProvider } from "antd";
 import type { ThemeConfig } from "antd";
+import Navbar from "@/components/shared/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ const switzer = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Swappr",
+  title: "Swappr | Nigeria's First phone valuation system",
   description: "Swappr is a phone worth calculator and exchange system",
 };
 
@@ -49,7 +50,10 @@ export default function RootLayout({
         <body
           className={`${switzer.variable} ${inter.variable} font-sans antialiased`}
         >
-          {children}
+          <Navbar />
+          <main className="mx-auto h-dvh max-w-[850px] px-4 pb-4 sm:px-0 sm:pb-0">
+            {children}
+          </main>
         </body>
       </ConfigProvider>
     </html>
