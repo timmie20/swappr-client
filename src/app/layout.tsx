@@ -6,6 +6,7 @@ import "./globals.css";
 import { ConfigProvider } from "antd";
 import type { ThemeConfig } from "antd";
 import Navbar from "@/components/shared/Navbar";
+import { ClerkProvider, QueryProvider } from "@/lib/providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,17 +46,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <ConfigProvider theme={customTheme}>
-        <body
-          className={`${switzer.variable} ${inter.variable} font-sans antialiased`}
-        >
-          <Navbar />
-          <main className="mx-auto h-dvh max-w-[850px] px-4 pb-4 sm:px-0 sm:pb-0">
-            {children}
-          </main>
-        </body>
-      </ConfigProvider>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <ConfigProvider theme={customTheme}>
+          <body
+            className={`${switzer.variable} ${inter.variable} font-sans antialiased`}
+          >
+            <QueryProvider>
+              <Navbar />
+              <main className="mx-auto h-dvh max-w-[850px] px-4 pb-4 sm:px-0 sm:pb-0">
+                {children}
+              </main>
+            </QueryProvider>
+          </body>
+        </ConfigProvider>
+      </html>
+    </ClerkProvider>
   );
 }
