@@ -2,7 +2,7 @@ import React from "react";
 import PrimaryButton from "@/components/others/PrimaryButton";
 import Heading from "@/components/shared/Heading";
 import { devices } from "@/data/data";
-import { Input } from "antd";
+import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import PhoneDealCard from "@/components/others/PhoneDealCard";
 
@@ -58,17 +58,13 @@ export default function Client() {
 
         <div className="relative mx-auto my-10 h-18 max-w-md rounded-full px-2 py-2 sm:flex sm:justify-center">
           <div className="from-app-secondary to-app-primary absolute inset-0 top-5 rounded-full bg-gradient-to-r blur-2xl" />
-          <Input
-            size="large"
-            placeholder="What are you looking to shop for?"
-            prefix={<Search size={16} />}
-            className="placeholder:text-tertiary/58 !font-switzer relative z-10"
-            style={{
-              height: "56px",
-              borderRadius: "50px",
-              position: "relative",
-            }}
-          />
+          <div className="relative z-10 flex w-full items-center">
+            <Search size={16} className="absolute left-4 text-gray-400" />
+            <Input
+              placeholder="What are you looking to shop for?"
+              className="placeholder:text-tertiary/58 font-switzer h-14 rounded-full pr-4 pl-12"
+            />
+          </div>
         </div>
       </div>
 
@@ -77,9 +73,9 @@ export default function Client() {
           {models.map((model) => (
             <div key={model.id} className="shrink-0 snap-start">
               <PrimaryButton
-                type={model.isSelected ? "primary" : "default"}
+                variant={model.isSelected ? "default" : "outline"}
                 shape="round"
-                size="large"
+                size="lg"
               >
                 {model.label}
               </PrimaryButton>

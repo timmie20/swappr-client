@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ConfigProvider } from "antd";
-import type { ThemeConfig } from "antd";
 import Navbar from "@/components/shared/Navbar";
 import { ClerkProvider, QueryProvider } from "@/lib/providers";
 
@@ -34,32 +32,24 @@ export const metadata: Metadata = {
   description: "Swappr is a phone worth calculator and exchange system",
 };
 
-const customTheme: ThemeConfig = {
-  token: {
-    colorPrimary: "#3b82fd",
-  },
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <ConfigProvider theme={customTheme}>
-          <body
-            className={`${switzer.variable} ${inter.variable} font-sans antialiased`}
-          >
-            <QueryProvider>
-              <Navbar />
-              <main className="mx-auto h-dvh max-w-[850px] px-4 pb-4 sm:px-0 sm:pb-0">
-                {children}
-              </main>
-            </QueryProvider>
-          </body>
-        </ConfigProvider>
+        <body
+          className={`${switzer.variable} ${inter.variable} font-sans antialiased`}
+        >
+          <QueryProvider>
+            <Navbar />
+            <main className="mx-auto h-dvh max-w-[850px] px-4 pb-4 sm:px-0 sm:pb-0">
+              {children}
+            </main>
+          </QueryProvider>
+        </body>
       </html>
     </ClerkProvider>
   );

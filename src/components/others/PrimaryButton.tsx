@@ -1,11 +1,17 @@
 import React from "react";
-import { Button, ConfigProvider } from "antd";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ButtonProps = {
-  type: "link" | "text" | "primary" | "dashed" | "default";
-  size: "small" | "middle" | "large";
-  shape: "default" | "circle" | "round";
+  variant?:
+    | "link"
+    | "ghost"
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary";
+  size?: "sm" | "default" | "lg" | "icon";
+  shape?: "default" | "round";
   children: React.ReactNode;
   onClick?: () => void;
   fullWidth?: boolean;
@@ -13,37 +19,27 @@ type ButtonProps = {
 };
 
 export default function PrimaryButton({
-  type,
-  size,
-  shape,
+  variant = "default",
+  size = "default",
+  shape = "default",
   children,
   onClick,
   fullWidth,
   className,
 }: ButtonProps) {
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: "#08161f",
-            algorithm: true,
-          },
-        },
-      }}
+    <Button
+      variant={variant}
+      size={size}
+      className={cn(
+        fullWidth && "w-full",
+        shape === "round" && "rounded-full",
+        "font-switzer text-small bg-[#08161f] font-medium hover:bg-[#08161f]/90",
+        className,
+      )}
+      onClick={onClick}
     >
-      <Button
-        type={type ? type : "default"}
-        shape={shape ? shape : "default"}
-        size={size ? size : "middle"}
-        className={cn(
-          `${fullWidth && "!w-full"} !font-switzer !text-small !font-medium`,
-          className,
-        )}
-        onClick={onClick}
-      >
-        {children}
-      </Button>
-    </ConfigProvider>
+      {children}
+    </Button>
   );
 }

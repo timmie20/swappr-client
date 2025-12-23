@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button } from "@/components/ui/button";
 export default function Navbar() {
   return (
     <nav className="bg-white">
@@ -12,18 +12,15 @@ export default function Navbar() {
           </div>
           <div className="flex items-center gap-2">
             <Button
-              variant="text"
-              color="primary"
-              shape="round"
-              size="middle"
-              className="!text-small !text-tertiary/52 !font-switzer !font-medium"
+              variant="ghost"
+              size="default"
+              className="text-small text-tertiary/52 font-switzer rounded-full font-medium"
             >
               Login
             </Button>
             <Button
-              className="!font-switzer !font-medium"
-              shape="round"
-              size="middle"
+              size="default"
+              className="font-switzer rounded-full font-medium"
             >
               Sign Up
             </Button>

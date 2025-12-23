@@ -1,7 +1,6 @@
 "use client";
-import "@ant-design/v5-patch-for-react-19";
 import React from "react";
-import { Progress } from "antd";
+import { Progress } from "../ui/progress";
 import Image from "next/image";
 import { useFormStore } from "@/store/form-store";
 import { Button } from "../ui/button";
@@ -27,13 +26,7 @@ const ProgressBar = React.memo(function ProgressBar() {
           priority
         />
       </Button>
-      <Progress
-        percent={progress}
-        showInfo={false}
-        size={{ height: 12 }}
-        strokeColor="#FFC918"
-        status="active"
-      />
+      <Progress value={progress} className="h-3" />
     </div>
   );
 });
