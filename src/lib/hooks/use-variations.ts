@@ -1,19 +1,24 @@
 /**
  * Variation Hooks
- * 
+ *
  * Custom React Query hooks for variation-related data fetching and mutations.
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { variationEndpoints } from '../api/endpoints';
-import { queryKeys } from '../api/query-keys';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
+import { variationEndpoints } from "../api/endpoints";
+import { queryKeys } from "../api/query-keys";
 import type {
   Variation,
   CreateVariationDto,
   UpdateVariationDto,
   PaginationParams,
   PaginatedResponse,
-} from '../api/types';
+} from "../api/types";
 
 // ============================================
 // Query Hooks (Data Fetching)
@@ -24,7 +29,10 @@ import type {
  */
 export function useVariations(
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Variation>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Variation>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.variations.list(params),
@@ -39,7 +47,10 @@ export function useVariations(
 export function useVariationsByModel(
   modelId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Variation>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Variation>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.variations.byModel(modelId, params),
@@ -54,7 +65,7 @@ export function useVariationsByModel(
  */
 export function useVariation(
   id: string,
-  options?: Omit<UseQueryOptions<Variation>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Variation>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.variations.detail(id),
@@ -69,7 +80,7 @@ export function useVariation(
  */
 export function useVariationBySlug(
   slug: string,
-  options?: Omit<UseQueryOptions<Variation>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Variation>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.variations.detail(slug),

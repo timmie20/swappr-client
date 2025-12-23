@@ -5,6 +5,7 @@
 This document outlines the architecture and structure of the **Swappr Member (User) Frontend**, built with **Next.js App Router**, **TypeScript**, **TanStack React Query**, and **Clerk Authentication**.
 
 The architecture is designed to be:
+
 - ✅ **Scalable** - modular structure that grows with your application
 - ✅ **Maintainable** - clear separation of concerns
 - ✅ **Type-safe** - TypeScript everywhere
@@ -113,41 +114,44 @@ src/
 ### 1. **API Client** (`src/lib/api/client.ts`)
 
 The API client is a configured Axios instance that:
+
 - Automatically attaches Clerk session tokens to requests
 - Handles errors globally
 - Provides consistent request/response structure
 
 ```typescript
-import { api } from '@/lib/api';
+import { api } from "@/lib/api";
 
 // Example usage (usually in endpoint functions)
-const response = await api.get('/brands');
+const response = await api.get("/brands");
 ```
 
 ### 2. **Query Keys** (`src/lib/api/query-keys.ts`)
 
 Centralized query key management ensures:
+
 - Consistent cache structure
 - Easy cache invalidation
 - Type-safe query keys
 
 ```typescript
-import { queryKeys } from '@/lib/api';
+import { queryKeys } from "@/lib/api";
 
 // Usage in hooks
-queryKey: queryKeys.brands.list({ page: 1 })
-queryKey: queryKeys.brands.detail('brand-id-123')
+queryKey: queryKeys.brands.list({ page: 1 });
+queryKey: queryKeys.brands.detail("brand-id-123");
 ```
 
 ### 3. **Endpoints** (`src/lib/api/endpoints/`)
 
 Service layer functions that:
+
 - Make HTTP requests to the backend
 - Return typed promises
 - Are consumed by React Query hooks
 
 ```typescript
-import { brandEndpoints } from '@/lib/api';
+import { brandEndpoints } from "@/lib/api";
 
 // Example
 const brands = await brandEndpoints.getAll({ page: 1, limit: 10 });
@@ -156,17 +160,18 @@ const brands = await brandEndpoints.getAll({ page: 1, limit: 10 });
 ### 4. **Custom Hooks** (`src/lib/hooks/`)
 
 React Query hooks that:
+
 - Encapsulate data fetching logic
 - Provide loading, error, and data states
 - Handle cache management automatically
 
 ```typescript
-import { useBrands, useCreateBrand } from '@/lib/hooks';
+import { useBrands, useCreateBrand } from "@/lib/hooks";
 
 function BrandsPage() {
   const { data, isLoading, error } = useBrands({ page: 1 });
   const createBrand = useCreateBrand();
-  
+
   // Use data, isLoading, error states
   // Use createBrand.mutate() to create a brand
 }
@@ -175,6 +180,7 @@ function BrandsPage() {
 ### 5. **Authentication** (Clerk)
 
 Authentication is handled by Clerk:
+
 - `ClerkProvider` wraps the app in `layout.tsx`
 - `middleware.ts` protects routes
 - Tokens are automatically attached to API requests
@@ -186,9 +192,9 @@ Authentication is handled by Clerk:
 ### Example 1: Fetching and Displaying Brands
 
 ```tsx
-'use client';
+"use client";
 
-import { useBrands } from '@/lib/hooks';
+import { useBrands } from "@/lib/hooks";
 
 export function BrandsList() {
   const { data, isLoading, error } = useBrands({ page: 1, limit: 10 });
@@ -212,9 +218,9 @@ export function BrandsList() {
 ### Example 2: Fetching Models by Brand
 
 ```tsx
-'use client';
+"use client";
 
-import { useModelsByBrand } from '@/lib/hooks';
+import { useModelsByBrand } from "@/lib/hooks";
 
 export function ModelsList({ brandId }: { brandId: string }) {
   const { data, isLoading } = useModelsByBrand(brandId);
@@ -237,9 +243,9 @@ export function ModelsList({ brandId }: { brandId: string }) {
 ### Example 3: Creating a Brand (Admin Only)
 
 ```tsx
-'use client';
+"use client";
 
-import { useCreateBrand } from '@/lib/hooks';
+import { useCreateBrand } from "@/lib/hooks";
 
 export function CreateBrandForm() {
   const createBrand = useCreateBrand();
@@ -247,19 +253,22 @@ export function CreateBrandForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
-    createBrand.mutate({
-      name: formData.get('name') as string,
-      slug: formData.get('slug') as string,
-      description: formData.get('description') as string,
-    }, {
-      onSuccess: () => {
-        alert('Brand created successfully!');
+
+    createBrand.mutate(
+      {
+        name: formData.get("name") as string,
+        slug: formData.get("slug") as string,
+        description: formData.get("description") as string,
       },
-      onError: (error) => {
-        alert(`Error: ${error.message}`);
+      {
+        onSuccess: () => {
+          alert("Brand created successfully!");
+        },
+        onError: (error) => {
+          alert(`Error: ${error.message}`);
+        },
       },
-    });
+    );
   };
 
   return (
@@ -268,7 +277,7 @@ export function CreateBrandForm() {
       <input name="slug" placeholder="Brand slug" required />
       <textarea name="description" placeholder="Description" />
       <button type="submit" disabled={createBrand.isPending}>
-        {createBrand.isPending ? 'Creating...' : 'Create Brand'}
+        {createBrand.isPending ? "Creating..." : "Create Brand"}
       </button>
     </form>
   );
@@ -278,30 +287,33 @@ export function CreateBrandForm() {
 ### Example 4: Submitting Question Answers
 
 ```tsx
-'use client';
+"use client";
 
-import { useSubmitAnswers } from '@/lib/hooks';
+import { useSubmitAnswers } from "@/lib/hooks";
 
 export function QuestionForm({ modelId }: { modelId: string }) {
   const submitAnswers = useSubmitAnswers();
 
   const handleSubmit = () => {
-    submitAnswers.mutate({
-      modelId,
-      answers: [
-        { questionId: 'q1', value: 'mint' },
-        { questionId: 'q2', value: 'yes' },
-      ],
-    }, {
-      onSuccess: (result) => {
-        console.log('Submission result:', result);
+    submitAnswers.mutate(
+      {
+        modelId,
+        answers: [
+          { questionId: "q1", value: "mint" },
+          { questionId: "q2", value: "yes" },
+        ],
       },
-    });
+      {
+        onSuccess: (result) => {
+          console.log("Submission result:", result);
+        },
+      },
+    );
   };
 
   return (
     <button onClick={handleSubmit} disabled={submitAnswers.isPending}>
-      {submitAnswers.isPending ? 'Submitting...' : 'Submit Answers'}
+      {submitAnswers.isPending ? "Submitting..." : "Submit Answers"}
     </button>
   );
 }
@@ -311,9 +323,13 @@ export function QuestionForm({ modelId }: { modelId: string }) {
 
 ```tsx
 // app/brands/page.tsx
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { brandEndpoints, queryKeys } from '@/lib/api';
-import { BrandsList } from './brands-list';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import { brandEndpoints, queryKeys } from "@/lib/api";
+import { BrandsList } from "./brands-list";
 
 export default async function BrandsPage() {
   const queryClient = new QueryClient();
@@ -346,23 +362,27 @@ export default async function BrandsPage() {
 ## 🧪 Best Practices
 
 ### Data Fetching
+
 - ✅ Use custom hooks from `src/lib/hooks/`
 - ✅ Prefer server-side prefetching for initial page loads
 - ✅ Let React Query handle caching and refetching
 - ❌ Don't fetch data directly in components using `fetch` or `axios`
 
 ### Mutations
+
 - ✅ Use mutation hooks for create/update/delete operations
 - ✅ Invalidate related queries after mutations
 - ✅ Handle success and error states
 - ❌ Don't manually refetch queries after mutations
 
 ### Query Keys
+
 - ✅ Always use the `queryKeys` factory
 - ✅ Invalidate at the appropriate level (e.g., `queryKeys.brands.all` invalidates all brand queries)
 - ❌ Don't hardcode query keys in components
 
 ### Types
+
 - ✅ Use types from `src/lib/api/types.ts`
 - ✅ Extend types as needed in feature modules
 - ❌ Don't use `any` or bypass type checking
@@ -393,18 +413,23 @@ NEXT_PUBLIC_API_URL=http://localhost:3000/api
 ## 🔄 Cache Invalidation Patterns
 
 ### Invalidate All
+
 ```typescript
 queryClient.invalidateQueries({ queryKey: queryKeys.brands.all });
 ```
 
 ### Invalidate Lists Only
+
 ```typescript
 queryClient.invalidateQueries({ queryKey: queryKeys.brands.lists() });
 ```
 
 ### Invalidate Specific Detail
+
 ```typescript
-queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') });
+queryClient.invalidateQueries({
+  queryKey: queryKeys.brands.detail("brand-id"),
+});
 ```
 
 ---
@@ -412,6 +437,7 @@ queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') })
 ## 📦 Available Hooks
 
 ### Brands
+
 - `useBrands(params)` - Fetch all brands
 - `useBrand(id)` - Fetch single brand by ID
 - `useBrandBySlug(slug)` - Fetch single brand by slug
@@ -420,6 +446,7 @@ queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') })
 - `useDeleteBrand()` - Delete brand
 
 ### Models
+
 - `useModels(params)` - Fetch all models
 - `useModelsByBrand(brandId, params)` - Fetch models by brand
 - `useModel(id)` - Fetch single model
@@ -429,6 +456,7 @@ queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') })
 - `useDeleteModel()` - Delete model
 
 ### Variations
+
 - `useVariations(params)` - Fetch all variations
 - `useVariationsByModel(modelId, params)` - Fetch variations by model
 - `useVariation(id)` - Fetch single variation
@@ -438,6 +466,7 @@ queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') })
 - `useDeleteVariation()` - Delete variation
 
 ### Options
+
 - `useOptions(params)` - Fetch all options
 - `useOptionsByModel(modelId, params)` - Fetch options by model
 - `useOptionsByVariation(variationId, params)` - Fetch options by variation
@@ -447,6 +476,7 @@ queryClient.invalidateQueries({ queryKey: queryKeys.brands.detail('brand-id') })
 - `useDeleteOption()` - Delete option
 
 ### Questions
+
 - `useQuestions(params)` - Fetch all questions
 - `useQuestionsByModel(modelId, params)` - Fetch questions by model
 - `useQuestionsByVariation(variationId, params)` - Fetch questions by variation
@@ -483,19 +513,23 @@ Now that the architecture is established, you can:
 ## 🆘 Troubleshooting
 
 ### "Query key not found" errors
+
 - Ensure you're using the `queryKeys` factory
 - Check that the query key matches the one used in the hook
 
 ### "Unauthorized" errors
+
 - Verify `.env.local` has correct Clerk keys
 - Check that user is authenticated
 - Ensure backend is running and accessible
 
 ### Data not updating after mutation
+
 - Verify query invalidation is set up correctly
 - Check that query keys match between queries and invalidations
 
 ### TypeScript errors
+
 - Ensure all imports are correct
 - Check that types are exported from the right modules
 - Run `pnpm tsc --noEmit` to check for type errors

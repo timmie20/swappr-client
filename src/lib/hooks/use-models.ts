@@ -1,19 +1,24 @@
 /**
  * Model Hooks
- * 
+ *
  * Custom React Query hooks for model-related data fetching and mutations.
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { modelEndpoints } from '../api/endpoints';
-import { queryKeys } from '../api/query-keys';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
+import { modelEndpoints } from "../api/endpoints";
+import { queryKeys } from "../api/query-keys";
 import type {
   Model,
   CreateModelDto,
   UpdateModelDto,
   PaginationParams,
   PaginatedResponse,
-} from '../api/types';
+} from "../api/types";
 
 // ============================================
 // Query Hooks (Data Fetching)
@@ -24,7 +29,10 @@ import type {
  */
 export function useModels(
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Model>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Model>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.models.list(params),
@@ -39,7 +47,10 @@ export function useModels(
 export function useModelsByBrand(
   brandId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Model>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Model>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.models.byBrand(brandId, params),
@@ -54,7 +65,7 @@ export function useModelsByBrand(
  */
 export function useModel(
   id: string,
-  options?: Omit<UseQueryOptions<Model>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Model>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.models.detail(id),
@@ -69,7 +80,7 @@ export function useModel(
  */
 export function useModelBySlug(
   slug: string,
-  options?: Omit<UseQueryOptions<Model>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Model>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.models.detail(slug),

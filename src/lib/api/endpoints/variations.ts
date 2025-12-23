@@ -1,10 +1,10 @@
 /**
  * Variation API Endpoints
- * 
+ *
  * Service layer for variation-related API calls.
  */
 
-import { api } from '../client';
+import { api } from "../client";
 import type {
   Variation,
   CreateVariationDto,
@@ -12,16 +12,21 @@ import type {
   PaginatedResponse,
   PaginationParams,
   ApiResponse,
-} from '../types';
+} from "../types";
 
 export const variationEndpoints = {
   /**
    * Get all variations (paginated)
    */
-  async getAll(params?: PaginationParams): Promise<PaginatedResponse<Variation>> {
-    const { data } = await api.get<PaginatedResponse<Variation>>('/variations', {
-      params,
-    });
+  async getAll(
+    params?: PaginationParams,
+  ): Promise<PaginatedResponse<Variation>> {
+    const { data } = await api.get<PaginatedResponse<Variation>>(
+      "/variations",
+      {
+        params,
+      },
+    );
     return data;
   },
 
@@ -30,11 +35,11 @@ export const variationEndpoints = {
    */
   async getByModel(
     modelId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Variation>> {
     const { data } = await api.get<PaginatedResponse<Variation>>(
       `/models/${modelId}/variations`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -52,7 +57,7 @@ export const variationEndpoints = {
    */
   async getBySlug(slug: string): Promise<Variation> {
     const { data } = await api.get<ApiResponse<Variation>>(
-      `/variations/slug/${slug}`
+      `/variations/slug/${slug}`,
     );
     return data.data;
   },
@@ -61,7 +66,7 @@ export const variationEndpoints = {
    * Create a new variation (admin only)
    */
   async create(dto: CreateVariationDto): Promise<Variation> {
-    const { data } = await api.post<ApiResponse<Variation>>('/variations', dto);
+    const { data } = await api.post<ApiResponse<Variation>>("/variations", dto);
     return data.data;
   },
 
@@ -71,7 +76,7 @@ export const variationEndpoints = {
   async update(id: string, dto: UpdateVariationDto): Promise<Variation> {
     const { data } = await api.patch<ApiResponse<Variation>>(
       `/variations/${id}`,
-      dto
+      dto,
     );
     return data.data;
   },

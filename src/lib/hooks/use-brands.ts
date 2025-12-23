@@ -1,20 +1,25 @@
 /**
  * Brand Hooks
- * 
+ *
  * Custom React Query hooks for brand-related data fetching and mutations.
  * These hooks provide a clean interface for components to interact with brand data.
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { brandEndpoints } from '../api/endpoints';
-import { queryKeys } from '../api/query-keys';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
+import { brandEndpoints } from "../api/endpoints";
+import { queryKeys } from "../api/query-keys";
 import type {
   Brand,
   CreateBrandDto,
   UpdateBrandDto,
   PaginationParams,
   PaginatedResponse,
-} from '../api/types';
+} from "../api/types";
 
 // ============================================
 // Query Hooks (Data Fetching)
@@ -25,7 +30,10 @@ import type {
  */
 export function useBrands(
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Brand>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Brand>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.brands.list(params),
@@ -39,7 +47,7 @@ export function useBrands(
  */
 export function useBrand(
   id: string,
-  options?: Omit<UseQueryOptions<Brand>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Brand>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.brands.detail(id),
@@ -54,7 +62,7 @@ export function useBrand(
  */
 export function useBrandBySlug(
   slug: string,
-  options?: Omit<UseQueryOptions<Brand>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Brand>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.brands.detail(slug),

@@ -1,10 +1,10 @@
 /**
  * Model API Endpoints
- * 
+ *
  * Service layer for model-related API calls.
  */
 
-import { api } from '../client';
+import { api } from "../client";
 import type {
   Model,
   CreateModelDto,
@@ -12,14 +12,14 @@ import type {
   PaginatedResponse,
   PaginationParams,
   ApiResponse,
-} from '../types';
+} from "../types";
 
 export const modelEndpoints = {
   /**
    * Get all models (paginated)
    */
   async getAll(params?: PaginationParams): Promise<PaginatedResponse<Model>> {
-    const { data } = await api.get<PaginatedResponse<Model>>('/models', {
+    const { data } = await api.get<PaginatedResponse<Model>>("/models", {
       params,
     });
     return data;
@@ -30,11 +30,11 @@ export const modelEndpoints = {
    */
   async getByBrand(
     brandId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Model>> {
     const { data } = await api.get<PaginatedResponse<Model>>(
       `/brands/${brandId}/models`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -59,7 +59,7 @@ export const modelEndpoints = {
    * Create a new model (admin only)
    */
   async create(dto: CreateModelDto): Promise<Model> {
-    const { data } = await api.post<ApiResponse<Model>>('/models', dto);
+    const { data } = await api.post<ApiResponse<Model>>("/models", dto);
     return data.data;
   },
 

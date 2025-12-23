@@ -1,12 +1,17 @@
 /**
  * Question Hooks
- * 
+ *
  * Custom React Query hooks for question-related data fetching and mutations.
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { questionEndpoints } from '../api/endpoints';
-import { queryKeys } from '../api/query-keys';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
+import { questionEndpoints } from "../api/endpoints";
+import { queryKeys } from "../api/query-keys";
 import type {
   Question,
   CreateQuestionDto,
@@ -14,7 +19,7 @@ import type {
   PaginationParams,
   PaginatedResponse,
   SubmitAnswersDto,
-} from '../api/types';
+} from "../api/types";
 
 // ============================================
 // Query Hooks (Data Fetching)
@@ -25,7 +30,10 @@ import type {
  */
 export function useQuestions(
   params?: PaginationParams & { modelId?: string; variationId?: string },
-  options?: Omit<UseQueryOptions<PaginatedResponse<Question>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Question>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.questions.list(params),
@@ -40,7 +48,10 @@ export function useQuestions(
 export function useQuestionsByModel(
   modelId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Question>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Question>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.questions.byModel(modelId, params),
@@ -56,7 +67,10 @@ export function useQuestionsByModel(
 export function useQuestionsByVariation(
   variationId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Question>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Question>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.questions.byVariation(variationId, params),
@@ -71,7 +85,7 @@ export function useQuestionsByVariation(
  */
 export function useQuestion(
   id: string,
-  options?: Omit<UseQueryOptions<Question>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Question>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.questions.detail(id),

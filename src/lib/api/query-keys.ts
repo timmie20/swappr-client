@@ -1,31 +1,31 @@
 /**
  * Query Keys Factory
- * 
+ *
  * Centralized query key management following TanStack Query best practices.
  * Ensures consistent cache key structure and makes cache invalidation easier.
- * 
+ *
  * Pattern:
  * - Top level: resource type (e.g., 'brands')
  * - Second level: 'list' or 'detail'
  * - Third level: filters/params
- * 
+ *
  * Example:
  * ['brands', 'list', { search: 'apple' }]
  * ['brands', 'detail', 'brand-id-123']
  */
 
-import type { PaginationParams } from './types';
+import type { PaginationParams } from "./types";
 
 export const queryKeys = {
   // ============================================
   // Brands
   // ============================================
   brands: {
-    all: ['brands'] as const,
-    lists: () => [...queryKeys.brands.all, 'list'] as const,
-    list: (params?: PaginationParams) => 
+    all: ["brands"] as const,
+    lists: () => [...queryKeys.brands.all, "list"] as const,
+    list: (params?: PaginationParams) =>
       [...queryKeys.brands.lists(), params] as const,
-    details: () => [...queryKeys.brands.all, 'detail'] as const,
+    details: () => [...queryKeys.brands.all, "detail"] as const,
     detail: (id: string) => [...queryKeys.brands.details(), id] as const,
   },
 
@@ -33,13 +33,13 @@ export const queryKeys = {
   // Models
   // ============================================
   models: {
-    all: ['models'] as const,
-    lists: () => [...queryKeys.models.all, 'list'] as const,
-    list: (params?: PaginationParams & { brandId?: string }) => 
+    all: ["models"] as const,
+    lists: () => [...queryKeys.models.all, "list"] as const,
+    list: (params?: PaginationParams & { brandId?: string }) =>
       [...queryKeys.models.lists(), params] as const,
-    details: () => [...queryKeys.models.all, 'detail'] as const,
+    details: () => [...queryKeys.models.all, "detail"] as const,
     detail: (id: string) => [...queryKeys.models.details(), id] as const,
-    byBrand: (brandId: string, params?: PaginationParams) => 
+    byBrand: (brandId: string, params?: PaginationParams) =>
       [...queryKeys.models.lists(), { brandId, ...params }] as const,
   },
 
@@ -47,13 +47,13 @@ export const queryKeys = {
   // Variations
   // ============================================
   variations: {
-    all: ['variations'] as const,
-    lists: () => [...queryKeys.variations.all, 'list'] as const,
-    list: (params?: PaginationParams & { modelId?: string }) => 
+    all: ["variations"] as const,
+    lists: () => [...queryKeys.variations.all, "list"] as const,
+    list: (params?: PaginationParams & { modelId?: string }) =>
       [...queryKeys.variations.lists(), params] as const,
-    details: () => [...queryKeys.variations.all, 'detail'] as const,
+    details: () => [...queryKeys.variations.all, "detail"] as const,
     detail: (id: string) => [...queryKeys.variations.details(), id] as const,
-    byModel: (modelId: string, params?: PaginationParams) => 
+    byModel: (modelId: string, params?: PaginationParams) =>
       [...queryKeys.variations.lists(), { modelId, ...params }] as const,
   },
 
@@ -61,15 +61,16 @@ export const queryKeys = {
   // Options
   // ============================================
   options: {
-    all: ['options'] as const,
-    lists: () => [...queryKeys.options.all, 'list'] as const,
-    list: (params?: PaginationParams & { modelId?: string; variationId?: string }) => 
-      [...queryKeys.options.lists(), params] as const,
-    details: () => [...queryKeys.options.all, 'detail'] as const,
+    all: ["options"] as const,
+    lists: () => [...queryKeys.options.all, "list"] as const,
+    list: (
+      params?: PaginationParams & { modelId?: string; variationId?: string },
+    ) => [...queryKeys.options.lists(), params] as const,
+    details: () => [...queryKeys.options.all, "detail"] as const,
     detail: (id: string) => [...queryKeys.options.details(), id] as const,
-    byModel: (modelId: string, params?: PaginationParams) => 
+    byModel: (modelId: string, params?: PaginationParams) =>
       [...queryKeys.options.lists(), { modelId, ...params }] as const,
-    byVariation: (variationId: string, params?: PaginationParams) => 
+    byVariation: (variationId: string, params?: PaginationParams) =>
       [...queryKeys.options.lists(), { variationId, ...params }] as const,
   },
 
@@ -77,15 +78,16 @@ export const queryKeys = {
   // Questions
   // ============================================
   questions: {
-    all: ['questions'] as const,
-    lists: () => [...queryKeys.questions.all, 'list'] as const,
-    list: (params?: PaginationParams & { modelId?: string; variationId?: string }) => 
-      [...queryKeys.questions.lists(), params] as const,
-    details: () => [...queryKeys.questions.all, 'detail'] as const,
+    all: ["questions"] as const,
+    lists: () => [...queryKeys.questions.all, "list"] as const,
+    list: (
+      params?: PaginationParams & { modelId?: string; variationId?: string },
+    ) => [...queryKeys.questions.lists(), params] as const,
+    details: () => [...queryKeys.questions.all, "detail"] as const,
     detail: (id: string) => [...queryKeys.questions.details(), id] as const,
-    byModel: (modelId: string, params?: PaginationParams) => 
+    byModel: (modelId: string, params?: PaginationParams) =>
       [...queryKeys.questions.lists(), { modelId, ...params }] as const,
-    byVariation: (variationId: string, params?: PaginationParams) => 
+    byVariation: (variationId: string, params?: PaginationParams) =>
       [...queryKeys.questions.lists(), { variationId, ...params }] as const,
   },
 
@@ -93,16 +95,16 @@ export const queryKeys = {
   // User-specific queries (if needed)
   // ============================================
   user: {
-    all: ['user'] as const,
-    profile: () => [...queryKeys.user.all, 'profile'] as const,
-    submissions: (params?: PaginationParams) => 
-      [...queryKeys.user.all, 'submissions', params] as const,
+    all: ["user"] as const,
+    profile: () => [...queryKeys.user.all, "profile"] as const,
+    submissions: (params?: PaginationParams) =>
+      [...queryKeys.user.all, "submissions", params] as const,
   },
 } as const;
 
 /**
  * Utility function to invalidate related queries
- * 
+ *
  * Example:
  * queryClient.invalidateQueries({ queryKey: queryKeys.brands.all })
  * This will invalidate all brand-related queries (lists and details)

@@ -1,11 +1,11 @@
 /**
  * Brand API Endpoints
- * 
+ *
  * Service layer for brand-related API calls.
  * All methods return promises that can be used with React Query.
  */
 
-import { api } from '../client';
+import { api } from "../client";
 import type {
   Brand,
   CreateBrandDto,
@@ -13,14 +13,14 @@ import type {
   PaginatedResponse,
   PaginationParams,
   ApiResponse,
-} from '../types';
+} from "../types";
 
 export const brandEndpoints = {
   /**
    * Get all brands (paginated)
    */
   async getAll(params?: PaginationParams): Promise<PaginatedResponse<Brand>> {
-    const { data } = await api.get<PaginatedResponse<Brand>>('/brands', {
+    const { data } = await api.get<PaginatedResponse<Brand>>("/brands", {
       params,
     });
     return data;
@@ -46,7 +46,7 @@ export const brandEndpoints = {
    * Create a new brand (admin only)
    */
   async create(dto: CreateBrandDto): Promise<Brand> {
-    const { data } = await api.post<ApiResponse<Brand>>('/brands', dto);
+    const { data } = await api.post<ApiResponse<Brand>>("/brands", dto);
     return data.data;
   },
 

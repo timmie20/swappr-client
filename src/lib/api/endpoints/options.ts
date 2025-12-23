@@ -1,10 +1,10 @@
 /**
  * Option API Endpoints
- * 
+ *
  * Service layer for option-related API calls.
  */
 
-import { api } from '../client';
+import { api } from "../client";
 import type {
   Option,
   CreateOptionDto,
@@ -12,16 +12,16 @@ import type {
   PaginatedResponse,
   PaginationParams,
   ApiResponse,
-} from '../types';
+} from "../types";
 
 export const optionEndpoints = {
   /**
    * Get all options (paginated)
    */
   async getAll(
-    params?: PaginationParams & { modelId?: string; variationId?: string }
+    params?: PaginationParams & { modelId?: string; variationId?: string },
   ): Promise<PaginatedResponse<Option>> {
-    const { data } = await api.get<PaginatedResponse<Option>>('/options', {
+    const { data } = await api.get<PaginatedResponse<Option>>("/options", {
       params,
     });
     return data;
@@ -32,11 +32,11 @@ export const optionEndpoints = {
    */
   async getByModel(
     modelId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Option>> {
     const { data } = await api.get<PaginatedResponse<Option>>(
       `/models/${modelId}/options`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -46,11 +46,11 @@ export const optionEndpoints = {
    */
   async getByVariation(
     variationId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Option>> {
     const { data } = await api.get<PaginatedResponse<Option>>(
       `/variations/${variationId}/options`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -67,7 +67,7 @@ export const optionEndpoints = {
    * Create a new option (admin only)
    */
   async create(dto: CreateOptionDto): Promise<Option> {
-    const { data } = await api.post<ApiResponse<Option>>('/options', dto);
+    const { data } = await api.post<ApiResponse<Option>>("/options", dto);
     return data.data;
   },
 
@@ -75,7 +75,10 @@ export const optionEndpoints = {
    * Update an option (admin only)
    */
   async update(id: string, dto: UpdateOptionDto): Promise<Option> {
-    const { data } = await api.patch<ApiResponse<Option>>(`/options/${id}`, dto);
+    const { data } = await api.patch<ApiResponse<Option>>(
+      `/options/${id}`,
+      dto,
+    );
     return data.data;
   },
 

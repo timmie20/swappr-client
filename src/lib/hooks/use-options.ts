@@ -1,19 +1,24 @@
 /**
  * Option Hooks
- * 
+ *
  * Custom React Query hooks for option-related data fetching and mutations.
  */
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { optionEndpoints } from '../api/endpoints';
-import { queryKeys } from '../api/query-keys';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+} from "@tanstack/react-query";
+import { optionEndpoints } from "../api/endpoints";
+import { queryKeys } from "../api/query-keys";
 import type {
   Option,
   CreateOptionDto,
   UpdateOptionDto,
   PaginationParams,
   PaginatedResponse,
-} from '../api/types';
+} from "../api/types";
 
 // ============================================
 // Query Hooks (Data Fetching)
@@ -24,7 +29,10 @@ import type {
  */
 export function useOptions(
   params?: PaginationParams & { modelId?: string; variationId?: string },
-  options?: Omit<UseQueryOptions<PaginatedResponse<Option>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Option>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.options.list(params),
@@ -39,7 +47,10 @@ export function useOptions(
 export function useOptionsByModel(
   modelId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Option>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Option>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.options.byModel(modelId, params),
@@ -55,7 +66,10 @@ export function useOptionsByModel(
 export function useOptionsByVariation(
   variationId: string,
   params?: PaginationParams,
-  options?: Omit<UseQueryOptions<PaginatedResponse<Option>>, 'queryKey' | 'queryFn'>
+  options?: Omit<
+    UseQueryOptions<PaginatedResponse<Option>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
   return useQuery({
     queryKey: queryKeys.options.byVariation(variationId, params),
@@ -70,7 +84,7 @@ export function useOptionsByVariation(
  */
 export function useOption(
   id: string,
-  options?: Omit<UseQueryOptions<Option>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Option>, "queryKey" | "queryFn">,
 ) {
   return useQuery({
     queryKey: queryKeys.options.detail(id),

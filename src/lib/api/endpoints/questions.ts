@@ -1,10 +1,10 @@
 /**
  * Question API Endpoints
- * 
+ *
  * Service layer for question-related API calls.
  */
 
-import { api } from '../client';
+import { api } from "../client";
 import type {
   Question,
   CreateQuestionDto,
@@ -13,16 +13,16 @@ import type {
   PaginationParams,
   ApiResponse,
   SubmitAnswersDto,
-} from '../types';
+} from "../types";
 
 export const questionEndpoints = {
   /**
    * Get all questions (paginated)
    */
   async getAll(
-    params?: PaginationParams & { modelId?: string; variationId?: string }
+    params?: PaginationParams & { modelId?: string; variationId?: string },
   ): Promise<PaginatedResponse<Question>> {
-    const { data } = await api.get<PaginatedResponse<Question>>('/questions', {
+    const { data } = await api.get<PaginatedResponse<Question>>("/questions", {
       params,
     });
     return data;
@@ -33,11 +33,11 @@ export const questionEndpoints = {
    */
   async getByModel(
     modelId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Question>> {
     const { data } = await api.get<PaginatedResponse<Question>>(
       `/models/${modelId}/questions`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -47,11 +47,11 @@ export const questionEndpoints = {
    */
   async getByVariation(
     variationId: string,
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedResponse<Question>> {
     const { data } = await api.get<PaginatedResponse<Question>>(
       `/variations/${variationId}/questions`,
-      { params }
+      { params },
     );
     return data;
   },
@@ -68,7 +68,10 @@ export const questionEndpoints = {
    * Submit answers to questions (member only)
    */
   async submitAnswers(dto: SubmitAnswersDto): Promise<unknown> {
-    const { data } = await api.post<ApiResponse<unknown>>('/questions/submit', dto);
+    const { data } = await api.post<ApiResponse<unknown>>(
+      "/questions/submit",
+      dto,
+    );
     return data.data;
   },
 
@@ -76,7 +79,7 @@ export const questionEndpoints = {
    * Create a new question (admin only)
    */
   async create(dto: CreateQuestionDto): Promise<Question> {
-    const { data } = await api.post<ApiResponse<Question>>('/questions', dto);
+    const { data } = await api.post<ApiResponse<Question>>("/questions", dto);
     return data.data;
   },
 
@@ -86,7 +89,7 @@ export const questionEndpoints = {
   async update(id: string, dto: UpdateQuestionDto): Promise<Question> {
     const { data } = await api.patch<ApiResponse<Question>>(
       `/questions/${id}`,
-      dto
+      dto,
     );
     return data.data;
   },

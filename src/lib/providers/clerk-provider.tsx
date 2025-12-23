@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { ClerkProvider as BaseClerkProvider } from '@clerk/nextjs';
-import { useAuth } from '@clerk/nextjs';
-import { useEffect, type ReactNode } from 'react';
-import { apiClient } from '../api/client';
+import { ClerkProvider as BaseClerkProvider } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
+import { useEffect, type ReactNode } from "react";
+import { apiClient } from "../api/client";
 
 /**
  * Clerk Provider with API Token Integration
- * 
+ *
  * Wraps the application with ClerkProvider and automatically
  * configures the API client to use Clerk session tokens.
  */
@@ -21,7 +21,7 @@ function TokenSetter() {
       try {
         return await getToken();
       } catch (error) {
-        console.error('Failed to get token:', error);
+        console.error("Failed to get token:", error);
         return null;
       }
     });
@@ -35,7 +35,7 @@ export function ClerkProvider({ children }: { children: ReactNode }) {
     <BaseClerkProvider
       appearance={{
         variables: {
-          colorPrimary: '#000000',
+          colorPrimary: "#000000",
         },
       }}
     >
